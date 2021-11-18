@@ -22,7 +22,7 @@ class VacanteController extends Controller
     {
 
 
-        $vacantes = Vacante::where('user_id', auth()->user()->id)->simplePaginate(10);
+        $vacantes = Vacante::where('user_id', auth()->user()->id)->latest()->simplePaginate(10);
 
 
         return view('vacantes.index', compact('vacantes'));
@@ -99,6 +99,7 @@ class VacanteController extends Controller
      */
     public function show(Vacante $vacante)
     {
+        // if($vacante->activa === 0) return abort(404);
        return view('vacantes.show')->with('vacante', $vacante);
     }
 
